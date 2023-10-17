@@ -1,10 +1,12 @@
-version: '2'
+version: '3.4'
 volumes:
   nextcloud:
   db:
 services:
   app:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     restart: always
     ports:
       - 8080:80
