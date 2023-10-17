@@ -3,6 +3,17 @@ volumes:
   nextcloud:
   db:
 services:
+  app:
+    build: ./docker
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - db
+    volumes:
+      - ./config:/var/www/html
+      - ./data:/var/www/html/data/
+
   db:
     image: mariadb
     restart: always
@@ -14,13 +25,3 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
-  app:
-    image: nextcloud:latest
-    restart: always
-    ports:
-      - 8080:80
-    links:
-      - db
-    volumes:
-      - ./config:/var/www/html
-      - ./data:/var/www/html/data/
