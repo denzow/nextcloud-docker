@@ -15,6 +15,13 @@ services:
     volumes:
       - ./config:/var/www/html
       - ./data:/var/www/html/data/
+    environment:
+      - PHP_MEMORY_LIMIT=2048M
+      - PHP_UPLOAD_LIMIT=1024M
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
 
   db:
     image: mariadb
